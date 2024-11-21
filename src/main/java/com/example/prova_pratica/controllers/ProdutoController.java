@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/produto")
@@ -35,6 +36,20 @@ public class ProdutoController {
             return ResponseEntity.ok(produtos);
         } catch (Exception ex) {
             return new ResponseEntity("Erro ao listar produtos: ", HttpStatusCode.valueOf(503));
+        }
+    }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarProdutoPorId(@PathVariable Long id){
+        try {
+            Optional<Produto> produto = produtoService.buscarProdutoPorId(id);
+            if (produto.isPresent()) {
+                return ResponseEntity.ok(produto.get());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception ex) {
+            return new ResponseEntity("Erro ao listar produto: ", HttpStatusCode.valueOf(503));
         }
     }
 
