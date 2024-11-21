@@ -1,5 +1,6 @@
 package com.example.prova_pratica.services;
 
+import com.example.prova_pratica.entities.DTO.AlterarPedidoDTO;
 import com.example.prova_pratica.entities.DTO.CriarPedidoDTO;
 import com.example.prova_pratica.entities.DTO.CriarProdutoDTO;
 import com.example.prova_pratica.entities.Pedido;
@@ -47,6 +48,19 @@ public class PedidoService {
 
 
         return pedidoRepository.save(pedido);
+    }
+
+    public AlterarPedidoDTO alterarPedido(AlterarPedidoDTO alterarPedidoDTO) throws Exception {
+        Optional<Pedido> pedido = pedidoRepository.findById(alterarPedidoDTO.getId());
+        if (Optional.ofNullable(pedido).isPresent()) {
+            pedido.get().setValorTotal(alterarPedidoDTO.getValorTotal());
+            pedido.get().setProdutos(alterarPedidoDTO.getProdutos());
+            pedidoRepository.save(pedido.get());
+            return alterarPedidoDTO;
+
+
+        }
+        throw new Exception("pedido não encontrado");
     }
 
 }

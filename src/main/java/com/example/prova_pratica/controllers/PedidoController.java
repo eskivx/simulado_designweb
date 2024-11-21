@@ -1,14 +1,12 @@
 package com.example.prova_pratica.controllers;
 
+import com.example.prova_pratica.entities.DTO.AlterarPedidoDTO;
 import com.example.prova_pratica.entities.DTO.CriarPedidoDTO;
 import com.example.prova_pratica.entities.Pedido;
 import com.example.prova_pratica.services.PedidoService;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pedido")
@@ -27,6 +25,16 @@ public class PedidoController {
             return ResponseEntity.ok(pedido);
         }catch (Exception ex){
             return new ResponseEntity<>("Erro ao criar pedido: ", HttpStatusCode.valueOf(504));
+        }
+    }
+
+    @PutMapping("/alterar")
+    public ResponseEntity<?> alterarPedido(@RequestBody AlterarPedidoDTO pedido){
+        try{
+            pedido = pedidoService.alterarPedido(pedido);
+            return ResponseEntity.ok(pedido);
+        } catch (Exception ex){
+            return new ResponseEntity("Erro ao alterar pedido: ", HttpStatusCode.valueOf(503));
         }
     }
 }
