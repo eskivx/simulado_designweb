@@ -5,6 +5,8 @@ import com.example.prova_pratica.entities.Produto;
 import com.example.prova_pratica.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProdutoService {
 
@@ -19,5 +21,9 @@ public class ProdutoService {
         produto.setPreco(criarProdutoDTO.getPreco());
 
         return produtoRepository.save(produto);
+    }
+
+    public Optional<Produto> buscarProdutoPorId(Long id){
+        return produtoRepository.findById(id);
     }
 }

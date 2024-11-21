@@ -18,10 +18,12 @@ public class PedidoController {
     public PedidoController(PedidoService pedidoService){
         this.pedidoService = pedidoService;
     }
+
+
     @PostMapping("/add")
     public ResponseEntity<?> criarPedido(@RequestBody CriarPedidoDTO pedido){
         try{
-            Pedido pedidocriado = PedidoService.criarPedido(pedido);
+            Pedido pedidocriado = pedidoService.criarPedido(pedido);
             return ResponseEntity.ok(pedido);
         }catch (Exception ex){
             return new ResponseEntity<>("Erro ao criar pedido: ", HttpStatusCode.valueOf(504));

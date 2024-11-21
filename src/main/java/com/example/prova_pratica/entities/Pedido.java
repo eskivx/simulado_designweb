@@ -1,15 +1,16 @@
 package com.example.prova_pratica.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long valorTotal;
+    @ManyToMany
     private List<Produto> produtos;
 
     public Long getId() {
@@ -26,5 +27,13 @@ public class Pedido {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public Long getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Long valorTotal) {
+        this.valorTotal = valorTotal;
     }
 }
