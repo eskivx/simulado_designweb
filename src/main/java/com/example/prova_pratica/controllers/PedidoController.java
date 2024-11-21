@@ -1,6 +1,7 @@
 package com.example.prova_pratica.controllers;
 
 import com.example.prova_pratica.entities.DTO.AlterarPedidoDTO;
+import com.example.prova_pratica.entities.DTO.AlterarProdutosdePedidoDTO;
 import com.example.prova_pratica.entities.DTO.CriarPedidoDTO;
 import com.example.prova_pratica.entities.Pedido;
 import com.example.prova_pratica.services.PedidoService;
@@ -34,7 +35,17 @@ public class PedidoController {
             pedido = pedidoService.alterarPedido(pedido);
             return ResponseEntity.ok(pedido);
         } catch (Exception ex){
-            return new ResponseEntity("Erro ao alterar pedido: ", HttpStatusCode.valueOf(503));
+            return new ResponseEntity("Erro ao alterar pedido: ", HttpStatusCode.valueOf(504));
+        }
+    }
+
+    @PatchMapping("/alterar/produtos")
+    public ResponseEntity<?> alterarProdutoDePedido(@RequestBody AlterarProdutosdePedidoDTO pedido){
+        try{
+            pedido = pedidoService.alterarProdutosdePedido(pedido);
+            return ResponseEntity.ok(pedido);
+        } catch (Exception ex){
+            return new ResponseEntity("Erro ao alterar pedido: ", HttpStatusCode.valueOf(504));
         }
     }
 }

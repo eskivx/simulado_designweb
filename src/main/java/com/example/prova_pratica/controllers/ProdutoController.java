@@ -35,7 +35,7 @@ public class ProdutoController {
             List<Produto> produtos = produtoService.listarProdutos();
             return ResponseEntity.ok(produtos);
         } catch (Exception ex) {
-            return new ResponseEntity("Erro ao listar produtos: ", HttpStatusCode.valueOf(503));
+            return new ResponseEntity("Erro ao listar produtos: ", HttpStatusCode.valueOf(504));
         }
     }
 
@@ -49,7 +49,7 @@ public class ProdutoController {
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception ex) {
-            return new ResponseEntity("Erro ao listar produto: ", HttpStatusCode.valueOf(503));
+            return new ResponseEntity("Erro ao listar produto: ", HttpStatusCode.valueOf(504));
         }
     }
 
