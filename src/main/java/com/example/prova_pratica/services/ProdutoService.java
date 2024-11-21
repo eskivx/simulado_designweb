@@ -5,6 +5,7 @@ import com.example.prova_pratica.entities.Produto;
 import com.example.prova_pratica.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,9 @@ public class ProdutoService {
 
     public Optional<Produto> buscarProdutoPorId(Long id){
         return produtoRepository.findById(id);
+    }
+
+    public List<Produto> listarProdutos(){
+        return produtoRepository.findAll();
     }
 }
