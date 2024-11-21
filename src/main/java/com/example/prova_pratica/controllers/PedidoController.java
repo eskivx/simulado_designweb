@@ -48,4 +48,14 @@ public class PedidoController {
             return new ResponseEntity("Erro ao alterar pedido: ", HttpStatusCode.valueOf(504));
         }
     }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<?> excluirPedido(@PathVariable Long id){
+        try {
+            pedidoService.excluirPedido(id);
+            return ResponseEntity.ok("se existe foi excluido com sucesso");
+        } catch (Exception ex){
+            return new ResponseEntity("Erro ao excluir pedido: ", HttpStatusCode.valueOf(504));
+        }
+    }
 }

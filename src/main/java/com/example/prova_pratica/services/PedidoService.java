@@ -74,4 +74,8 @@ public class PedidoService {
         throw new Exception("pedido não encontrado");
     }
 
+    public void excluirPedido(Long id) throws Exception {
+        pedidoRepository.deleteById(id);
+    }
+
 }
